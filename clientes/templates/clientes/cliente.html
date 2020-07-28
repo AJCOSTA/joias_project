@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} Lista de ClientesS {% endblock %}
+
+{% block content %} 
+ 
+<div class="offset-1 col-10 list-div">
+    <h2 text-align="center">Detalhes do Cliente:</h2>
+    <h3><i  class="fa fa-user" aria-hidden="true"></i> {{cliente.nome}} </h3>
+    <p><i class="fa fa-street-view" aria-hidden="true"></i> End: {{cliente.endereco}}</p>
+    <p><i class="fa fa-code" aria-hidden="true"></i> CPF: {{cliente.CPF}}</p>
+    <p><i class="fa fa-phone" aria-hidden="true"></i> Telefone: {{cliente.telefone}}</p>
+
+    
+
+
+
+
+{% endblock %}>
+
+h2 { text-align: center }

@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %} Lista de ClientesS {% endblock %}
+
+{% block content %} 
+<!-- Adionando Botão de inserir Cliente -->
+<div class="offset-1 col-10 list-div">
+    <h1> Lista de Clientes </h1>
+    <a id="add-link" href="newcliente/">
+    <div class="col-2 add-div">
+        <i class="fa fa-plus" aria-hidden="true"></i> Adicionar Cliente
+      
+    </div>
+    </a>
+
+<!-- Adicionando Barra de Tarefa -->
+<div class="col-9 search-div">
+    <form method="GET" id="search-form">
+   <input type="text" class="form-control" id="search" name="search" placeholder="Digite o numero do CPF para buscar o cliente" value="{{ request.GET.search }}">
+   <i class="fa fa-search" aria-hidden="true" id="search-btn"></i>
+    </form>
+</div>
+
+
+
+<!-- Adionando mecanisco de filtragem -->
+<div class="col-12 filter-div">
+    <span>Filtrar por:</span>
+    <select name="filter" id="filter" class="form-control">
+        <option value="">Escolha uma opção...</option>
+        <option value="ativo">Cliente ativo</option>
+        <option value="inativo">Cliente inativo</option>
+    </select>
+</div>
+
+
+
+<!-- Adicionando Mensagem de deleção -->
+<ul class="messages">
+    {% for message in messages %}
+       <li {% if message.tags %}class="alert alert-{{message.tags}}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+
+
+    <ul class="task-list">
+        {% for cliente in clientes %}
+
+ 
+        <li class="task-item">       
+  
+
+
+            <span><a href="/cliente/{{cliente.id}}">{{cliente.nome}}</a></span>
+            <a href="delete/{{cliente.id}}" class="delete-btn"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            <a href="edit/{{cliente.id}}"> <i class="fa fa-edit" aria-hidden="true"></i></a>
+             <!-- <a href="changestatus/{{cliente.id}}"> <i class="fas fa-check" ></i></a>  -->
+
+
+        </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Adicionando Paginação nas paginas -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if clientes.has_previous %}
+                <a href="?page={{ clientes.previous_page_number }}"><i class="fa fa-arrow-left" aria-hidden="true"></i></i></a>
+            {% endif %}
+            
+            {% if clientes.paginator.num_pages %}
+            <span class="current">
+               Monstrando Pagina {{ clientes.number }} de {{ clientes.paginator.num_pages }}
+            </span>
+            {% endif %}
+        
+            {% if clientes.has_next %}
+                <a href="?page={{ clientes.next_page_number }}"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+            {% endif %}
+        </span>
+    </div>
+    
+
+</div>
+
+
+{% endblock %}>
+
+
